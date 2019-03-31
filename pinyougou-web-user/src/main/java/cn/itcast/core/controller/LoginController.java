@@ -17,12 +17,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-
+    /**
+     *
+     * @param request
+     * @return
+     */
     //当前登陆人 用户名
     @RequestMapping("/name")
     public Map<String,Object> showName(HttpServletRequest request){
 
-
+        System.out.println("555555454");
+        System.out.println("555555454");
+        System.out.println("555555454");
+        System.out.println("555555454");
+        System.out.println("555555454");
 
         //使用SecurityContextHolder 工具类 获取用户名或是用户名对象 当前线程
         String username2 = SecurityContextHolder.getContext().getAuthentication().getName();
