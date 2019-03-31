@@ -4,5 +4,10 @@ app.service('loginService',function($http){
 	this.showName=function(){
 		return $http.get('../login/name.do');
 	}
+
+    //订单列表
+    this.findOrderList=function(){
+        return $http.get('../login/findOrderList.do');
+    }
 	
 });
