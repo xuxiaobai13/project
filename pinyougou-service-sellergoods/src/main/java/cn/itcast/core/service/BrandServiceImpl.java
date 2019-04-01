@@ -124,12 +124,14 @@ public class BrandServiceImpl implements BrandService {
      * 在页面上选择, 将选择好的品牌信息存入数据库表示审核通过
      */
     Long brandID = 55454545555L;
+    List<Brand> brands = null;
+
     @Override
     public void shenhe(Brand brand) {
-
-        brand.setId(brandID+1);
         BrandsVo brandsVo = new BrandsVo();
-        brandsVo.getBrandList().add(brand);
+        brand.setId(brandID+1);
+        brands.add(brand);
+        brandsVo.setBrandList(brands);
         brandsVo.setStatus("0");
 
         redisTemplate.boundValueOps("shenQingBrand").set(brandsVo);

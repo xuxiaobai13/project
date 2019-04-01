@@ -20,6 +20,7 @@ public class brandsController {
     @RequestMapping("/shenhe")
     public Result shenhe(@RequestBody Brand brand){
         try {
+            System.out.println(brand);
             brandService.shenhe(brand);
             return new Result(true,"提交审核成功");
         } catch (Exception e) {
