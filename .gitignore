@@ -12,3 +12,4 @@ gen
 target
 *.log
 *.log.*
+db.properties

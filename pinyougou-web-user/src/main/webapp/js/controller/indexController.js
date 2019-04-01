@@ -8,4 +8,14 @@ app.controller('indexController',function($scope,loginService){
 					}
 			);
 	}
+
+    //查询订单列表
+    $scope.findOrderList=function(){
+        loginService.findOrderList().success(
+            function(response){
+                $scope.entity=response;
+
+            }
+        );
+    }
 });
