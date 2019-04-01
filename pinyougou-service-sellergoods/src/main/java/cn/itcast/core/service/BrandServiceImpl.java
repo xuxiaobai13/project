@@ -1,5 +1,6 @@
 package cn.itcast.core.service;
 
+import cn.itcast.common.utils.IdWorker;
 import cn.itcast.core.dao.good.BrandDao;
 import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.BrandQuery;
@@ -9,6 +10,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import vo.BrandsVo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.Map;
  */
 @Service
 public class BrandServiceImpl implements BrandService {
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
 
@@ -113,5 +118,48 @@ public class BrandServiceImpl implements BrandService {
     public List<Map> selectOptionList() {
         return brandDao.selectOptionList();
     }
+    /**
+     * 2019.4.1品牌申请模块新增
+     * 将商家后台提交申请的品牌信息存入缓存中,运营商后台从缓存取出,并展示到前端页面
+     * 在页面上选择, 将选择好的品牌信息存入数据库表示审核通过
+     */
+    Long brandID = 55454545555L;
+    @Override
+    public void shenhe(Brand brand) {
+
+        brand.setId(brandID+1);
+        BrandsVo brandsVo = new BrandsVo();
+        brandsVo.getBrandList().add(brand);
+        brandsVo.setStatus("0");
+
+        redisTemplate.boundValueOps("shenQingBrand").set(brandsVo);
+
+
+    }
+
+    @Override
+    public List<Brand> findSQ() {
+        BrandsVo brandVo = (BrandsVo) redisTemplate.boundValueOps("shenQingBrand").get();
+        List<Brand> brandList = brandVo.getBrandList();
+        return brandList;
+    }
+
+//
+//  public BrandsVo SQBrand(){
+//            Brand brand = new Brand();
+//            brand.setFirstChar("H");
+//            brand.setName("黑马");
+//            brandsVo.setBrand(brand);
+//            //取
+//        BrandsVo shenQingBrand = (BrandsVo) redisTemplate.boundValueOps("shenQingBrand").get();
+//        return shenQingBrand;
+//    }
+
+
+
+
+
+
+
 
 }

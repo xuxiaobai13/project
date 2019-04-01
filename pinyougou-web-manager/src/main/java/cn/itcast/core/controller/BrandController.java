@@ -47,6 +47,7 @@ public class BrandController {
     //保存
     @RequestMapping("/add")
     public Result add(@RequestBody Brand brand){
+
         //保存
         try {
             brandService.add(brand);
@@ -55,7 +56,6 @@ public class BrandController {
             //e.printStackTrace();
             return new Result(false,"保存失败");
         }
-
     }
     //保存
     @RequestMapping("/update")
