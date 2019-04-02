@@ -1,9 +1,10 @@
 package cn.itcast.core.controller;
 
+import cn.itcast.core.pojo.address.Address;
 import cn.itcast.core.pojo.seckill.SeckillGoods;
+import cn.itcast.core.service.AddressService;
 import cn.itcast.core.service.SecKillService;
 import com.alibaba.dubbo.config.annotation.Reference;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class secKillCartController {
     @Reference
     private SecKillService secKillService;
+
 
     //回显
     @RequestMapping("/findList")

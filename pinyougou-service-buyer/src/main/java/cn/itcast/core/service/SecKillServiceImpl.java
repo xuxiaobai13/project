@@ -34,8 +34,8 @@ public class SecKillServiceImpl implements SecKillService {
            SeckillGoodsQuery.Criteria criteria = query.createCriteria();
            //起始时间and库存
            criteria.andStatusEqualTo("1").andStockCountGreaterThan(0).andStartTimeLessThan(new Date()).andEndTimeGreaterThan(new Date());
-           List<SeckillGoods> list1 = seckillGoodsDao.selectByExample(query);
-           for (SeckillGoods seckillGoods : list1) {
+            list = seckillGoodsDao.selectByExample(query);
+           for (SeckillGoods seckillGoods : list) {
 
                redisTemplate.boundHashOps("seckillSKU").put(seckillGoods.getId(),seckillGoods);
                //设置存活时间
