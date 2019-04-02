@@ -5,8 +5,10 @@ app.controller("brandController",function($scope,$controller,$http,brandService)
 	
 	// 查询所有的品牌列表的方法:
 	$scope.findSQ = function(){
+		//alert(1)
 		// 向后台发送请求:
 		brandService.findSQ().success(function(response){
+			console.log(response)
 			$scope.list = response;
 		});
 	}
@@ -29,7 +31,7 @@ app.controller("brandController",function($scope,$controller,$http,brandService)
 			object = brandService.update($scope.entity);
 		}else{
 			// 保存
-			object = brandService.add($scope.entity);
+			object = brandService.shenhe($scope.entity);
 		}
 		object.success(function(response){
 			// {flag:true,message:xxx}

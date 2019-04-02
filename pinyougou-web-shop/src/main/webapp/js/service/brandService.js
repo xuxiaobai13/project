@@ -1,6 +1,6 @@
 // 定义服务层:
 app.service("brandService",function($http){
-	this.findAll = function(){
+	this.findSQ = function(){
 		return $http.get("../brand/findSQ.do");
 	}
 	
@@ -8,7 +8,7 @@ app.service("brandService",function($http){
 		return $http.get("../brand/findPage.do?pageNum="+page+"&pageSize="+rows);
 	}
 	
-	this.add = function(entity){
+	this.shenhe = function(entity){
 		return $http.post("../brand/shenhe.do",entity);
 	}
 	

@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import vo.BrandsVo;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 品牌管理
@@ -123,15 +121,18 @@ public class BrandServiceImpl implements BrandService {
      * 将商家后台提交申请的品牌信息存入缓存中,运营商后台从缓存取出,并展示到前端页面
      * 在页面上选择, 将选择好的品牌信息存入数据库表示审核通过
      */
-    Long brandID = 55454545555L;
-    List<Brand> brands = null;
+    //Long brandID = 55454545555L;
+    List<Brand> brands = new ArrayList<>();
 
     @Override
     public void shenhe(Brand brand) {
+        int brandID = new Random().nextInt(5);
+        System.out.println(brandID);
         BrandsVo brandsVo = new BrandsVo();
-        brand.setId(brandID+1);
+        brand.setId((long) brandID);
         brands.add(brand);
         brandsVo.setBrandList(brands);
+
         brandsVo.setStatus("0");
 
         redisTemplate.boundValueOps("shenQingBrand").set(brandsVo);
