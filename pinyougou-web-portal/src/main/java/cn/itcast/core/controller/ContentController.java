@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 网站前台之首页轮播图
@@ -22,5 +23,11 @@ public class ContentController {
     @RequestMapping("/findByCategoryId")
     public List<Content> findByCategoryId(Long categoryId){
         return contentService.findByCategoryId(categoryId);
+    }
+
+    //查询 商品信息
+    @RequestMapping("/findByGoods")
+    public List<Object> findByGoods(){
+        return contentService.findByGoods();
     }
 }
