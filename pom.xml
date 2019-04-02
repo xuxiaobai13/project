@@ -23,6 +23,7 @@
         <module>pinyougou-service-page</module>
         <module>pinyougou-service-buyer</module>
         <module>pinyougou-web-seckill</module>
+        <module>redis-ceshi</module>
 
     </modules>
 
