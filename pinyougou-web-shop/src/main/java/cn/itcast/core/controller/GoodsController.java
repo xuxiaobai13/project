@@ -2,6 +2,7 @@ package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.service.GoodsService;
+import cn.itcast.core.service.SecKillService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;
