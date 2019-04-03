@@ -5,5 +5,10 @@ app.service("contentService",function($http){
 
     this.findByGoods = function(){
         return $http.get("content/findByGoods.do");
-    }
+    };
+
+    this.findItemByCat = function(parentId){
+        return $http.get("content/findItemByCat.do?parentId="+parentId);
+    };
+
 });

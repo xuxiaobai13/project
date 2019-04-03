@@ -1,6 +1,7 @@
 package cn.itcast.core.service;
 
 import cn.itcast.core.pojo.ad.Content;
+import cn.itcast.core.pojo.item.ItemCat;
 import entity.PageResult;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface ContentService {
     List<Content> findByCategoryId(Long categoryId);
 
 	List<Object> findByGoods();
+
+	List<ItemCat> findItemByCat(Long parentId);
 }

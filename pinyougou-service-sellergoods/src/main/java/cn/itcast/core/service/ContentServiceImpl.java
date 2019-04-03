@@ -3,10 +3,12 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.ad.ContentDao;
 import cn.itcast.core.dao.good.GoodsDao;
 import cn.itcast.core.dao.good.GoodsDescDao;
+import cn.itcast.core.dao.item.ItemCatDao;
 import cn.itcast.core.pojo.ad.Content;
 import cn.itcast.core.pojo.ad.ContentQuery;
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojo.good.GoodsDesc;
+import cn.itcast.core.pojo.item.ItemCat;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
@@ -29,6 +31,9 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private GoodsDescDao goodsDescDao;
+
+    @Autowired
+    private ItemCatDao itemCatDao;
 
     @Override
     public List<Content> findAll() {
@@ -131,6 +136,7 @@ public class ContentServiceImpl implements ContentService {
 
         for (Integer count : intSet) {
             goodsitem = new HashMap<>();
+            System.out.println(count);
             goodsitem.put("id", goods.get(count).getId());
             goodsitem.put("price", goods.get(count).getPrice());
             goodsitem.put("goodsName", goods.get(count).getGoodsName());
@@ -143,10 +149,6 @@ public class ContentServiceImpl implements ContentService {
             List<Map<String, String>> stringList = (List<Map<String, String>>) JSONArray.parse(itemImages);
             goodsitem.put("url", stringList.get(0).get("url"));
             goodsList.add(goodsitem);
-            //3:查询出来之后放到缓存中一份
-            redisTemplate.boundHashOps("content").put(goods.get(count).getId(), goodsList);
-            //存活时间
-            redisTemplate.boundHashOps("content").expire(8, TimeUnit.MINUTES);
         }
 
 /*
@@ -169,6 +171,14 @@ public class ContentServiceImpl implements ContentService {
         }*/
 
         return goodsList;
+    }
+
+
+    @Override
+    public List<ItemCat> findItemByCat(Long parentId) {
+        ItemCat itemCat = new ItemCat();
+        itemCat.setParentId(parentId);
+        return itemCatDao.selectByPrimaryKeys(parentId);
     }
 
 }
