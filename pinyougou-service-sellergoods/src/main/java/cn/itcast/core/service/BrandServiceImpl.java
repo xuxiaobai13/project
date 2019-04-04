@@ -126,16 +126,17 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void shenhe(Brand brand) {
-        int brandID = new Random().nextInt(5);
+        long brandID = (long) (10000 + Math.random() * 99999);
         System.out.println(brandID);
         BrandsVo brandsVo = new BrandsVo();
-        brand.setId((long) brandID);
+        brand.setId( brandID);
         brands.add(brand);
         brandsVo.setBrandList(brands);
 
         brandsVo.setStatus("0");
 
         redisTemplate.boundValueOps("shenQingBrand").set(brandsVo);
+        //redisTemplate.boundListOps("sssss").leftPush()
 
 
     }
@@ -143,20 +144,11 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Brand> findSQ() {
         BrandsVo brandVo = (BrandsVo) redisTemplate.boundValueOps("shenQingBrand").get();
+
         List<Brand> brandList = brandVo.getBrandList();
         return brandList;
     }
 
-//
-//  public BrandsVo SQBrand(){
-//            Brand brand = new Brand();
-//            brand.setFirstChar("H");
-//            brand.setName("黑马");
-//            brandsVo.setBrand(brand);
-//            //取
-//        BrandsVo shenQingBrand = (BrandsVo) redisTemplate.boundValueOps("shenQingBrand").get();
-//        return shenQingBrand;
-//    }
 
 
 

@@ -10,7 +10,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import vo.SpecificationSQ;
 import vo.SpecificationVo;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class SpecificationServiceImpl implements SpecificationService {
     private SpecificationDao specificationDao;
     @Autowired
     private SpecificationOptionDao specificationOptionDao;
+    @Autowired
+    private RedisTemplate redisTemplate;
     //条件 查询分页对象
     @Override
     public PageResult search(Integer page, Integer rows, Specification specification) {
@@ -92,5 +96,16 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Override
     public List<Map> selectOptionList() {
         return specificationDao.selectOptionList();
+    }
+
+    @Override
+    public void shenhe(SpecificationVo specVo) {
+        long id = (long) (10000 + Math.random() * 99999);
+        SpecificationSQ specificationSQ = new SpecificationSQ();
+        specificationSQ.setSpecificationVo(specVo);
+        specificationSQ.setStatus("0");
+        redisTemplate.boundListOps("specShenHe").leftPush(specificationSQ);
+
+
     }
 }
