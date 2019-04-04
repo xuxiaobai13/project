@@ -22,7 +22,9 @@
         <module>pinyougou-service-search</module>
         <module>pinyougou-service-page</module>
         <module>pinyougou-service-buyer</module>
-        <module>../fastDFSDemo</module>
+        <module>pinyougou-web-seckill</module>
+        <module>redis-ceshi</module>
+
     </modules>
 
 

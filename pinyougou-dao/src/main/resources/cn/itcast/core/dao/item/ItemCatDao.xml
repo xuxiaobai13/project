@@ -198,4 +198,14 @@
       type_id = #{typeId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap" parameterType="cn.itcast.core.pojo.item.ItemCat" >
+    select
+    id,parent_id,name,type_id
+    from tb_item_cat
+    where parent_id = #{parentId,jdbcType=BIGINT}
+  </select>
+
+
 </mapper>
